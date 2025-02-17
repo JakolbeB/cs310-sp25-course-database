@@ -29,7 +29,21 @@ public class SectionDAO {
             
             if (conn.isValid(0)) {
                 
-                // INSERT YOUR CODE HERE
+                // Prepare the SQL statement
+                 ps = conn.prepareStatement(QUERY_FIND); 
+                // Set the values for the parameters in the SQL statement
+                ps.setInt(1, termid);
+                ps.setString(2, subjectid);
+                ps.setString(3, num);
+                // Execute the SQL statement and check if it has results
+                boolean hasResults = ps.execute(); 
+                if (hasResults) {
+                    // Get the ResultSet from the executed SQL statement
+                    rs = ps.getResultSet(); 
+                    // Convert the ResultSet to a JSON string using utility method
+                    result = DAOUtility.getResultSetAsJson(rs); // Convert the ResultSet to a JSON string using utility method
+                }
+              
                 
             }
             
